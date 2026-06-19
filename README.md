@@ -22,7 +22,17 @@ python manage.py runserver
 
 ## Структура
 
-- `demoekz_project/` — настройки Django
+- `demoekz_project/` — настройки Django (`settings.py`, `test_settings.py`)
 - `store/` — приложение (модели, view, авторизация, команды)
 - `templates/store/` — HTML-шаблоны
+- `tests/` — pytest-сценарии по ролям (Гость / Клиент / Менеджер / Админ)
+- `docs/` — диаграммы (ERD, UML Use Case) и план тестирования
 - `schema.sql` — SQL-скрипт создания БД
+
+## Запуск тестов
+
+```bash
+pytest -q
+```
+
+Тесты работают с реальной БД `Demoekzamen` (`conftest.py` → `django_db_setup`), без создания `test_Demoekzamen`.
