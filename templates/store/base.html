@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Интернет-магазин{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'store/styles.css' %}">
+</head>
+<body>
+  <header class="top">
+    <a href="{% url 'product_list' %}" class="logo">Demoekzamen · v3</a>
+    {% if user_display %}
+      <nav>
+        <a href="{% url 'product_list' %}">Товары</a>
+        <a href="{% url 'order_list' %}">Заказы</a>
+        <span class="who">{{ user_display }}</span>
+        <a href="{% url 'logout' %}">Выход</a>
+      </nav>
+    {% endif %}
+  </header>
+  <main>
+    {% if messages %}
+      <ul class="messages">
+        {% for m in messages %}<li class="msg {{ m.tags }}">{{ m }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

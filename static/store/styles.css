@@ -1,0 +1,40 @@
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f7f7f9; color: #222; }
+
+.top { display: flex; justify-content: space-between; align-items: center;
+       padding: 12px 24px; background: #2b2d42; color: #fff; }
+.top a { color: #fff; text-decoration: none; margin-right: 16px; }
+.top .logo { font-weight: 700; font-size: 18px; }
+.top .who { margin-right: 12px; opacity: .8; }
+
+main { padding: 24px; max-width: 1200px; margin: 0 auto; }
+h1 { margin-top: 0; }
+
+.messages { list-style: none; padding: 0; }
+.msg { padding: 8px 12px; border-radius: 4px; margin-bottom: 8px; background: #ffe0e0; }
+.msg.success { background: #e0ffe0; }
+
+.filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.filters input, .filters select { padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; }
+
+.btn, button { display: inline-block; padding: 8px 16px; background: #2b2d42;
+               color: #fff; border: 0; border-radius: 4px; cursor: pointer;
+               text-decoration: none; }
+.btn:hover, button:hover { background: #1b1d32; }
+
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: left; }
+th { background: #efeff5; font-weight: 600; }
+
+.form-login, .form-product, .form-order {
+    display: grid; gap: 12px; max-width: 520px;
+    padding: 20px; background: #fff; border-radius: 8px;
+}
+.form-login label, .form-product label, .form-order label {
+    display: grid; gap: 4px; font-size: 14px;
+}
+.form-login input, .form-product input, .form-order input,
+.form-product select, .form-order select, .form-product textarea {
+    padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;
+}
+.form-product textarea { min-height: 80px; resize: vertical; }

@@ -1,0 +1,21 @@
+{% extends 'store/base.html' %}
+{% block title %}Заказ № {{ order.order_id }}{% endblock %}
+{% block content %}
+  <h1>Заказ № {{ order.order_id }}</h1>
+  <form method="post" class="form-order">
+    {% csrf_token %}
+    <label>Статус
+      <select name="status">
+        <option {% if order.status == 'Новый' %}selected{% endif %}>Новый</option>
+        <option {% if order.status == 'Готов к выдаче' %}selected{% endif %}>Готов к выдаче</option>
+        <option {% if order.status == 'Получен' %}selected{% endif %}>Получен</option>
+        <option {% if order.status == 'Отменён' %}selected{% endif %}>Отменён</option>
+      </select>
+    </label>
+    <label>Дата выдачи <input type="date" name="delivery_date" value="{{ order.delivery_date|date:'Y-m-d' }}"></label>
+    <label>Количество   <input type="number" name="quantity" value="{{ order.quantity }}"></label>
+    <button>Сохранить</button>
+    <a href="{% url 'order_list' %}">Отмена</a>
+  </form>
+{% endblock %}
+

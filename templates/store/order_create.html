@@ -1,0 +1,27 @@
+{% extends 'store/base.html' %}
+{% block title %}Новый заказ{% endblock %}
+{% block content %}
+  <h1>Новый заказ</h1>
+  <p>Дата: {{ current_datetime }}</p>
+  <form method="post" class="form-order">
+    {% csrf_token %}
+    <label>Товар
+      <select name="product" required>
+        {% for p in products %}
+          <option value="{{ p.article }}">{{ p.name }} (ост. {{ p.quantity }})</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Количество <input name="quantity" type="number" min="1" value="1"></label>
+    <label>Пвз
+      <select name="pickpoint">
+        {% for pp in pickpoints %}
+          <option value="{{ pp.pickpoint_id }}">{{ pp.address }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Код самовывоза <input name="pickup_code" type="number"></label>
+    <button>Оформить</button>
+  </form>
+{% endblock %}
+

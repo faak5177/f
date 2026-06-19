@@ -1,0 +1,60 @@
+{% extends 'store/base.html' %}
+{% block title %}Каталог{% endblock %}
+{% block content %}
+  <h1>Каталог товаров</h1>
+
+  <form method="get" class="filters">
+    <input type="text" name="q" value="{{ current_search }}" placeholder="Поиск…">
+    <select name="category">
+      <option value="">— категория —</option>
+      {% for c in categories %}
+        <option value="{{ c.category_id }}" {% if c.category_id == current_category %}selected{% endif %}>{{ c.category_name }}</option>
+      {% endfor %}
+    </select>
+    <select name="manufacturer">
+      <option value="">— производитель —</option>
+      {% for m in manufacturers %}
+        <option value="{{ m.manufacture_id }}" {% if m.manufacture_id == current_manufacturer %}selected{% endif %}>{{ m.manufacture_name }}</option>
+      {% endfor %}
+    </select>
+    <select name="sort">
+      <option value="">— сортировка —</option>
+      <option value="price_asc"  {% if current_sort == 'price_asc' %}selected{% endif %}>Цена ↑</option>
+      <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Цена ↓</option>
+      <option value="name_asc"   {% if current_sort == 'name_asc' %}selected{% endif %}>Название ↑</option>
+      <option value="name_desc"  {% if current_sort == 'name_desc' %}selected{% endif %}>Название ↓</option>
+    </select>
+    <button>Применить</button>
+  </form>
+
+  {% if can_manage %}<p><a class="btn" href="{% url 'product_create' %}">+ Добавить товар</a></p>{% endif %}
+
+  <table class="products">
+    <thead><tr>
+      <th>Артикул</th><th>Название</th><th>Категория</th>
+      <th>Производитель</th><th>Цена</th><th>Скидка</th>
+      <th>Итого</th><th>Остаток</th><th></th>
+    </tr></thead>
+    <tbody>
+    {% for p in products %}
+      <tr style="{% if p.is_highlighted %}background:#F4A460;{% elif p.out_of_stock %}background:#87CEEB;{% endif %}">
+        <td>{{ p.article }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.category.category_name }}</td>
+        <td>{{ p.manufacture.manufacture_name }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.discount }}%</td>
+        <td>{{ p.final_price }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>
+          {% if can_manage %}<a href="{% url 'product_edit' p.article %}">ред.</a>{% endif %}
+          {% if can_admin %}<a href="{% url 'product_delete' p.article %}" onclick="return confirm('Удалить?')">×</a>{% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="9">Ничего не найдено</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

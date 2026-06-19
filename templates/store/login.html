@@ -1,0 +1,11 @@
+{% extends 'store/base.html' %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+  <h1>Вход в систему</h1>
+  <form method="post" class="form-login">
+    {% csrf_token %}
+    <label>Логин  <input name="login"    required></label>
+    <label>Пароль <input name="password" type="password" required></label>
+    <button type="submit">Войти</button>
+  </form>
+{% endblock %}

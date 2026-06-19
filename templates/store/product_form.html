@@ -1,0 +1,50 @@
+{% extends 'store/base.html' %}
+{% block title %}{% if is_edit %}Редактирование товара{% else %}Новый товар{% endif %}{% endblock %}
+{% block content %}
+  <h1>{% if is_edit %}Редактирование товара{% else %}Новый товар{% endif %}</h1>
+  <form method="post" class="form-product" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Артикул
+      <input name="article" value="{% if is_edit %}{{ product.article }}{% else %}{{ next_article }}{% endif %}" readonly>
+    </label>
+    <label>Название  <input name="name"  value="{{ product.name }}"  required></label>
+    <label>Ед. изм.   <input name="unit"  value="{{ product.unit }}"></label>
+    <label>Цена      <input name="price" type="number" step="0.01" value="{{ product.price }}" required></label>
+    <label>Макс. скидка <input name="max_discount" type="number" value="{{ product.max_discount }}"></label>
+    <label>Скидка сейчас <input name="discount"   type="number" value="{{ product.discount }}"></label>
+    <label>Остаток   <input name="quantity" type="number" value="{{ product.quantity }}"></label>
+
+    <label>Категория
+      <select name="category">
+        {% for c in categories %}
+          <option value="{{ c.category_id }}" {% if product.category_id == c.category_id %}selected{% endif %}>{{ c.category_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Производитель
+      <select name="manufacturer">
+        {% for m in manufacturers %}
+          <option value="{{ m.manufacture_id }}" {% if product.manufacture_id == m.manufacture_id %}selected{% endif %}>{{ m.manufacture_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>Поставщик
+      <select name="supplier">
+        {% for s in suppliers %}
+          <option value="{{ s.suplyer_id }}" {% if product.suplyer_id == s.suplyer_id %}selected{% endif %}>{{ s.suplyer_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Описание <textarea name="description">{{ product.description }}</textarea></label>
+    <label>Фото (путь) <input name="image_path" value="{{ product.image_path }}"></label>
+
+    {% if product.image_path %}
+      <img src="/media/{{ product.image_path }}" width="300" height="200" alt="">
+    {% endif %}
+
+    <button>Сохранить</button>
+    <a href="{% url 'product_list' %}">Отмена</a>
+  </form>
+{% endblock %}
+
