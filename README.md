@@ -22,12 +22,26 @@ python manage.py runserver
 
 ## Структура
 
+### Код приложения
 - `demoekz_project/` — настройки Django (`settings.py`, `test_settings.py`)
 - `store/` — приложение (модели, view, авторизация, команды)
 - `templates/store/` — HTML-шаблоны
 - `tests/` — pytest-сценарии по ролям (Гость / Клиент / Менеджер / Админ)
-- `docs/` — диаграммы (ERD, UML Use Case) и план тестирования
-- `schema.sql` — SQL-скрипт создания БД
+
+### База данных
+- `schema.sql` / `database_script.sql` — DDL-скрипт создания БД
+- `import.sql` — `\copy`-команды импорта CSV
+- `add_order_columns.py` — миграция недостающих колонок в `Orders`
+
+### Исходные данные (CSV в корне)
+- `Роли.csv`, `Категории.csv`, `Производители.csv`, `Поставщики.csv`,
+- `Пользователи.csv`, `Точки подбора.csv`, `Товары.csv`
+
+### Вариативная часть
+- `backup.bat` / `backup.sh` — создание `database_backup.backup` (pg_dump custom)
+- `restore.bat` — восстановление из резервной копии
+- `disk_report.sql` — отчёт о месте на диске (БД, таблицы, индексы)
+- `docs/` — ER-диаграмма, UML Use Case, алгоритмы, план тестирования, инструкции
 
 ## Запуск тестов
 

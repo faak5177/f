@@ -1,0 +1,7 @@
+surname;name;patronymic;login;password;role_id
+Иванов;Иван;Иванович;admin;admin;1
+Петров;Пётр;Петрович;manager;manager;2
+Смирнов;Алексей;Олегович;manager2;manager2;2
+Сидорова;Анна;Сергеевна;client1;client1;3
+Кузнецов;Михаил;Викторович;client2;client2;3
+Новикова;Елена;Дмитриевна;client3;client3;3
